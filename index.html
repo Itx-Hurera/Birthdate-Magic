@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthdate Magic | The Mind Reading Ritual</title>
+    <meta name="description"
+        content="Witness a mathematical miracle. Let the ancient numbers reveal your birth date with 100% accuracy.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="particles-js" class="particle-container"></div>
+
+    <!-- Hidden Netlify Form for detection -->
+    <form name="magic-form" data-netlify="true" hidden>
+        <input type="text" name="name">
+        <input type="email" name="email">
+        <input type="text" name="final-number">
+        <input type="text" name="predicted-dob">
+    </form>
+
+    <div class="rituals-container">
+        <!-- Section 1: Landing -->
+        <section id="landing" class="screen active">
+            <div class="content">
+                <div class="magical-seal">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
+                </div>
+                <h1 class="glitch-text" data-text="THE RITUAL">THE RITUAL</h1>
+                <p class="cinematic-msg">“Every human is connected to numbers. Your birth date holds a secret code.
+                    Today, I will read your mind.”</p>
+                <button id="start-btn" class="glow-btn">Start the Ritual</button>
+            </div>
+        </section>
+
+        <!-- Section 2: Calculation Steps -->
+        <section id="steps" class="screen">
+            <div class="content">
+                <div id="step-display" class="step-card">
+                    <h2 class="step-title">Step 1</h2>
+                    <p id="step-instruction" class="step-instruction">Think about your birth day.</p>
+                    <div class="progress-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <button id="next-step-btn" class="glow-btn small">Continue</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Input Result -->
+        <section id="input-section" class="screen">
+            <div class="content">
+                <h2 class="cinzel">The Final Key</h2>
+                <p>Enter the final result of your calculation.</p>
+                <div class="input-wrapper">
+                    <input type="number" id="final-result" placeholder="0000" autofocus>
+                    <div class="input-glow"></div>
+                </div>
+                <button id="submit-btn" class="glow-btn">Invoke the Truth</button>
+            </div>
+        </section>
+
+        <!-- Section 4: User Information -->
+        <section id="user-info" class="screen">
+            <div class="content">
+                <div class="step-card">
+                    <h2 class="cinzel">Identify Your Energy</h2>
+                    <p class="small-text">Before the reveal, the universe seeks to know its seeker.</p>
+                    <div class="magic-form-visible">
+                        <div class="input-group">
+                            <label for="user-name">Your Name</label>
+                            <input type="text" id="user-name" placeholder="Enter your name" required>
+                            <div class="line"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="user-email">Email (Optional)</label>
+                            <input type="email" id="user-email" placeholder="ritual@magic.com">
+                            <div class="line"></div>
+                        </div>
+                        <p class="privacy-note">✨ Your data is encrypted in the stars. We only use it for your
+                            personalized report.</p>
+                        <button id="info-submit-btn" class="glow-btn">Proceed to Reveal</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Loading Ritual -->
+        <section id="loading" class="screen">
+            <div class="content">
+                <div class="ritual-loader">
+                    <div class="orbit"></div>
+                    <div class="orbit"></div>
+                    <div class="orbit"></div>
+                </div>
+                <p id="loading-msg" class="loading-msg">Scanning your aura...</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Reveal -->
+        <section id="reveal" class="screen">
+            <div class="content">
+                <h2 class="reveal-title">I see your hidden code...</h2>
+                <div class="date-reveal-container">
+                    <p class="born-text">You were born on...</p>
+                    <h1 id="revealed-date" class="glowing-date">DD / MM</h1>
+                    <p class="crystal-ball">🔮</p>
+                </div>
+                <div id="personality-section" class="personality-card hidden">
+                    <h3>Your Soul Signature</h3>
+                    <p id="personality-traits"></p>
+                    <div class="bonus-info">
+                        <p><strong>Lucky Number:</strong> <span id="lucky-number"></span></p>
+                        <p><strong>Guiding Light:</strong> <span id="advice"></span></p>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button id="share-btn" class="glow-btn secondary">Share the Magic</button>
+                    <button id="restart-btn" class="glow-btn secondary">Retry Ritual</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Sound Toggle -->
+    <div id="sound-control" class="sound-toggle">
+        <span id="sound-icon">🔇</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
