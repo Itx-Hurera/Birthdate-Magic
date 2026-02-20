@@ -73,9 +73,7 @@ const elements = {
     personalityCard: document.getElementById('personality-section'),
     personalityTraits: document.getElementById('personality-traits'),
     luckyNumber: document.getElementById('lucky-number'),
-    adviceText: document.getElementById('advice'),
-    soundToggle: document.getElementById('sound-control'),
-    soundIcon: document.getElementById('sound-icon')
+    adviceText: document.getElementById('advice')
 };
 
 // Initialization
@@ -101,8 +99,6 @@ function setupEventListeners() {
     });
 
     elements.shareBtn.addEventListener('click', handleShare);
-
-    elements.soundToggle.addEventListener('click', toggleSound);
 
     // Enter key support for input
     elements.finalResultInput.addEventListener('keypress', (e) => {
@@ -252,11 +248,6 @@ function handleShare() {
         navigator.clipboard.writeText(text);
         alert("Ritual link copied to clipboard!");
     }
-}
-
-function toggleSound() {
-    const isMuted = elements.soundIcon.innerText === '🔇';
-    elements.soundIcon.innerText = isMuted ? '🔊' : '🔇';
 }
 
 function checkPreviousResult() {
