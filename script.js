@@ -201,30 +201,38 @@ function revealDate(result) {
     const day = Math.floor(magicNum / 100);
     const month = magicNum % 100;
 
-    // Validation
-    if (day < 1 || day > 31 || month < 1 || month > 12) {
-        elements.revealedDate.innerText = "The numbers are clouded...";
-        elements.personalityTraits.innerText = "It seems the calculation was disrupted. Realign your thoughts and try again.";
-    } else {
-        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        elements.revealedDate.innerText = `${day.toString().padStart(2, '0')} / ${monthNames[month - 1]}`;
+    // Enhanced Validation
+    const isValidDate = (day, month) => {
+        if (month < 1 || month > 12) return false;
+        if (day < 1 || day > 31) return false;
+        const daysInMonth = new Date(2000, month, 0).getDate(); // Leap year 2000 used for Feb 29
+        return day <= daysInMonth;
+    };
 
-        // Generate Personality
-        const traitSeed = (day + month) % state.traits.length;
-        elements.personalityTraits.innerText = state.traits[traitSeed];
-        elements.luckyNumber.innerText = (day * month) % 9 + 1;
-        elements.adviceText.innerText = state.advice[(day + month) % state.advice.length];
-
-        // Store in localStorage
-        localStorage.setItem('lastBirthResult', JSON.stringify({ day, month, date: new Date().toLocaleDateString() }));
-
-        // Submit to Netlify
-        submitToNetlify(day, month);
+    if (!isValidDate(day, month)) {
+        alert("The number that you calculated is wrong. Your energy and the numbers do not align. Please check your math and try again!");
+        switchScreen('input');
+        return;
     }
+
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    elements.revealedDate.innerText = `${day.toString().padStart(2, '0')} / ${monthNames[month - 1]}`;
+
+    // Generate Personality
+    const traitSeed = (day + month) % state.traits.length;
+    elements.personalityTraits.innerText = state.traits[traitSeed];
+    elements.luckyNumber.innerText = (day * month) % 9 + 1;
+    elements.adviceText.innerText = state.advice[(day + month) % state.advice.length];
+
+    // Store in localStorage
+    localStorage.setItem('lastBirthResult', JSON.stringify({ day, month, date: new Date().toLocaleDateString() }));
+
+    // Submit to Netlify (Only for valid dates)
+    submitToNetlify(day, month);
 
     switchScreen('reveal');
 
-    // Trigger visual confetti effect
+    // Trigger visual effects
     createExplosion();
     document.body.classList.add('ritual-complete');
     setTimeout(() => document.body.classList.remove('ritual-complete'), 2000);
