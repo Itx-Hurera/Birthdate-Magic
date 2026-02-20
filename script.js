@@ -276,22 +276,26 @@ async function submitToNetlify(day, month) {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const dobString = `${day} ${monthNames[month - 1]}`;
 
-    const formData = new FormData();
-    formData.append('form-name', 'magic-form');
-    formData.append('name', state.userData.name);
-    formData.append('email', state.userData.email || 'Not provided');
-    formData.append('final-number', state.finalNumber);
-    formData.append('predicted-dob', dobString);
+    // Use URLSearchParams for application/x-www-form-urlencoded submission (Netlify standard)
+    const body = new URLSearchParams();
+    body.append('form-name', 'magic-form');
+    body.append('name', state.userData.name);
+
+    // Only send valid email if provided, otherwise send empty string to avoid validation errors
+    body.append('email', state.userData.email || '');
+
+    body.append('final-number', state.finalNumber);
+    body.append('predicted-dob', dobString);
 
     try {
         const response = await fetch('/', {
             method: 'POST',
-            body: formData
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: body.toString()
         });
 
         if (response.ok) {
             console.log("Your energy has been recorded in the universe.");
-            // Optional: update UI with success if needed
             if (state.userData.email) {
                 elements.personalityTraits.innerText += "\n\n✨ Get your full personality report in your email.";
             }
